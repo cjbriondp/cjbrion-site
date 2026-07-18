@@ -36,17 +36,23 @@
     {
       "title": "Robot Heart — Diplo",
       "client": "Culture",
-      "role": "Cinematographer"
+      "role": "Cinematographer",
+      "video_url": "https://www.youtube.com/watch?v=XblsAh_jlko",
+      "thumbnail": "/images/Diplo.jpg"
+    },
+    {
+      "title": "Mechanical Expression",
+      "client": "Narrative",
+      "role": "Cinematographer",
+      "video_url": "https://vimeo.com/156351262?fl=pl&fe=cm",
+      "thumbnail": "/images/mmexpCU-1.jpg"
     },
     {
       "title": "Nick News",
       "client": "Series",
-      "role": "Cinematographer"
-    },
-    {
-      "title": "Kristi-Lee & The Pines — “Fade”",
-      "client": "Music Video",
-      "role": "Second Camera"
+      "role": "Cinematographer",
+      "video_url": "https://vimeo.com/1067540531/3360767126?share=copy&fl=sv&fe=ci",
+      "thumbnail": "/images/NNRollercoasters.jpg"
     }
   ]
 }
