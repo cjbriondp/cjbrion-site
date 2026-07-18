@@ -44,7 +44,8 @@ async function load(){
   const port=document.querySelector('#bio .port');
   if(settings.portrait){port.innerHTML='<img src="'+settings.portrait+'" alt="C.J. Brion">';}
   // contact
-  const mw=document.querySelector('#mailtoWrap a'); mw.textContent='mailto:'+settings.email; mw.href='mailto:'+settings.email;
+  var mailLink=document.getElementById('mailLink'); if(mailLink){mailLink.textContent=settings.email; mailLink.href='mailto:'+settings.email;}
+  var copyBtn=document.getElementById('copyMail'); if(copyBtn){copyBtn.setAttribute('data-email',settings.email);}
   // stills grid
   const brick=document.querySelector('#stills .brick'); brick.innerHTML='';
   (stills.images||[]).forEach(src=>{
@@ -80,6 +81,14 @@ window.showView=function(name,el){
 };
 window.showContact=function(el){if(current==='contact'){goHome();return;}current='contact';clearNav();el.classList.add('active');stage.classList.add('view');Object.values(PANELS).forEach(id=>document.getElementById(id).classList.remove('on'));document.getElementById('mailtoWrap').classList.add('on');};
 window.openCV=function(){window.open('CJ_Brion_CV.pdf','_blank');};
+window.copyEmail=function(btn){
+  var ml=document.getElementById('mailLink');
+  var em=(btn&&btn.getAttribute('data-email'))||(ml?ml.textContent:'');
+  var note=document.getElementById('copiedNote');
+  function done(){ if(note){note.classList.add('show'); clearTimeout(note._t); note._t=setTimeout(function(){note.classList.remove('show');},1500);} }
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(em).then(done,done);}
+  else{try{var t=document.createElement('textarea');t.value=em;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.focus();t.select();document.execCommand('copy');document.body.removeChild(t);}catch(e){}done();}
+};
 
 document.addEventListener('DOMContentLoaded',function(){
   stage=document.getElementById('stage');
