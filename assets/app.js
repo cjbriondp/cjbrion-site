@@ -25,16 +25,18 @@ function applyTheme(t){
 }
 
 async function load(){
-  const [settings,stills,motion]=await Promise.all([
+  const [settings,stills,motion,background]=await Promise.all([
     fetch('content/settings.json').then(r=>r.json()),
     fetch('content/stills.json').then(r=>r.json()),
-    fetch('content/motion.json').then(r=>r.json())
+    fetch('content/motion.json').then(r=>r.json()),
+    fetch('content/background.json').then(r=>r.ok?r.json():{}).catch(function(){return {};})
   ]);
   applyTheme(settings.theme);
-  // background slideshow (first ~8 stills)
+  // background slideshow — dedicated Background list (falls back to the first 8 stills if empty)
   const bg=document.querySelector('.bg');
-  (stills.images||[]).slice(0,8).forEach((src,i)=>{
-    const d=document.createElement('div'); d.className='slide'+(i===0?' on':''); d.style.backgroundImage='url('+src+')'; bg.appendChild(d);
+  var bgImgs=(background&&background.images&&background.images.length)?background.images:(stills.images||[]).slice(0,8);
+  bgImgs.forEach((src,i)=>{
+    const d=document.createElement('div'); d.className='slide'+(i===0?' on':''); d.style.backgroundImage='url("'+encodeURI(src)+'")'; bg.appendChild(d);
   });
   // bio
   const txt=document.querySelector('#bio .txt'); txt.innerHTML='';
