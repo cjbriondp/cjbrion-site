@@ -1,0 +1,60 @@
+{
+  "projects": [
+    {
+      "title": "Smashing Pumpkins — “Solara”",
+      "client": "Music Video",
+      "role": "Cinematographer",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "title": "Marshmello × Lil Peep — “Spotlight”",
+      "client": "Music Video",
+      "role": "Cinematographer",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "title": "Lil Peep — “Awful Things”",
+      "client": "Music Video",
+      "role": "Cinematographer",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "title": "SAKS — Spring / Summer",
+      "client": "Commercial",
+      "role": "Cinematographer",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "title": "Samsung — TVC",
+      "client": "Commercial",
+      "role": "Cinematographer",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "title": "Robot Heart — Diplo",
+      "client": "Culture",
+      "role": "Cinematographer",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "title": "Nick News",
+      "client": "Series",
+      "role": "Cinematographer",
+      "video_url": "",
+      "thumbnail": ""
+    },
+    {
+      "title": "Kristi-Lee & The Pines — “Fade”",
+      "client": "Music Video",
+      "role": "Second Camera",
+      "video_url": "",
+      "thumbnail": ""
+    }
+  ]
+}

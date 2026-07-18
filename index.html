@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJ Brion</title><link rel="stylesheet" href="assets/styles.css">
+</head><body>
+<div class="stage" id="stage">
+  <div class="bg"></div><div class="veil"></div>
+  <div class="id">
+    <h1>CJ BRION</h1>
+    <div class="sub">Cinematographer + Photographer</div>
+    <div class="sub">Los Angeles / Available Worldwide</div>
+    <div class="toggle">[ <a class="navitem" onclick="showView('motion',this)">Motion</a>&nbsp;&nbsp;&nbsp;<a class="navitem" onclick="showView('stills',this)">Still</a> ]</div>
+  </div>
+  <div class="menu">
+    <a class="navitem" onclick="showView('bio',this)">bio</a>
+    <div id="contactRow"><a class="navitem" onclick="showContact(this)">contact</a><span id="mailtoWrap"><a href="mailto:contact@cjbrion.com">mailto:contact@cjbrion.com</a></span></div>
+    <a class="navitem" onclick="openCV()">cv</a>
+  </div>
+  <div class="panel" id="bio"><div class="port"><span>Portrait<br>— from Bio pics —</span></div><div class="txt"></div></div>
+  <div class="panel" id="motion"></div>
+  <div class="panel" id="stills"><div class="brick"></div></div>
+</div>
+<script src="assets/app.js"></script>
+</body></html>
