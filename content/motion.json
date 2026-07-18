@@ -3,58 +3,43 @@
     {
       "title": "Smashing Pumpkins — “Solara”",
       "client": "Music Video",
-      "role": "Cinematographer",
-      "video_url": "",
-      "thumbnail": ""
+      "role": "Cinematographer"
     },
     {
       "title": "Marshmello × Lil Peep — “Spotlight”",
       "client": "Music Video",
       "role": "Cinematographer",
-      "video_url": "",
-      "thumbnail": ""
+      "video_url": "https://www.youtube.com/watch?v=7R1N-8SoqcM"
     },
     {
       "title": "Lil Peep — “Awful Things”",
       "client": "Music Video",
-      "role": "Cinematographer",
-      "video_url": "",
-      "thumbnail": ""
+      "role": "Cinematographer"
     },
     {
       "title": "SAKS — Spring / Summer",
       "client": "Commercial",
-      "role": "Cinematographer",
-      "video_url": "",
-      "thumbnail": ""
+      "role": "Cinematographer"
     },
     {
       "title": "Samsung — TVC",
       "client": "Commercial",
-      "role": "Cinematographer",
-      "video_url": "",
-      "thumbnail": ""
+      "role": "Cinematographer"
     },
     {
       "title": "Robot Heart — Diplo",
       "client": "Culture",
-      "role": "Cinematographer",
-      "video_url": "",
-      "thumbnail": ""
+      "role": "Cinematographer"
     },
     {
       "title": "Nick News",
       "client": "Series",
-      "role": "Cinematographer",
-      "video_url": "",
-      "thumbnail": ""
+      "role": "Cinematographer"
     },
     {
       "title": "Kristi-Lee & The Pines — “Fade”",
       "client": "Music Video",
-      "role": "Second Camera",
-      "video_url": "",
-      "thumbnail": ""
+      "role": "Second Camera"
     }
   ]
 }
