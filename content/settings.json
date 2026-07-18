@@ -9,6 +9,9 @@
   "instagram": "https://www.instagram.com/_cjbrion/",
   "imdb": "https://www.imdb.com/name/nm4767495/",
   "theme": {
+    "font": "Helvetica",
+    "text_color": "#000000",
+    "background_color": "#ffffff",
     "image_opacity": 30
   }
 }
