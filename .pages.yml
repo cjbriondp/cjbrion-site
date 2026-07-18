@@ -1,0 +1,40 @@
+# Pages CMS (pagescms.org) — sign in with GitHub at app.pagescms.org, pick this repo, and edit.
+media:
+  input: images
+  output: /images
+
+content:
+  - name: settings
+    label: Bio & Contact
+    type: file
+    path: content/settings.json
+    fields:
+      - { name: portrait, label: Portrait photo, type: image }
+      - { name: bio, label: Bio paragraphs, type: text, list: true }
+      - { name: email, label: Email, type: string }
+      - { name: phone, label: Phone, type: string }
+      - { name: instagram, label: Instagram URL, type: string }
+      - { name: imdb, label: IMDb URL, type: string }
+
+  - name: stills
+    label: Stills — photo grid
+    type: file
+    path: content/stills.json
+    fields:
+      - { name: images, label: Photos (drag to reorder), type: image, list: true }
+
+  - name: motion
+    label: Motion — video gallery
+    type: file
+    path: content/motion.json
+    fields:
+      - name: projects
+        label: Projects (drag to reorder)
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: client, label: Client / Type, type: string }
+          - { name: role, label: Role, type: string }
+          - { name: video_url, label: Video URL (Vimeo / YouTube), type: string }
+          - { name: thumbnail, label: Thumbnail image, type: image }
