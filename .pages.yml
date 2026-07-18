@@ -15,6 +15,14 @@ content:
       - { name: phone, label: Phone, type: string }
       - { name: instagram, label: Instagram URL, type: string }
       - { name: imdb, label: IMDb URL, type: string }
+      - name: theme
+        label: Theme — font, colours, background opacity
+        type: object
+        fields:
+          - { name: font, label: "Font (Helvetica, Space Grotesk, Space Mono, or Georgia)", type: string }
+          - { name: text_color, label: "Text colour — hex, e.g. #000000", type: string }
+          - { name: background_color, label: "Background colour — hex, e.g. #ffffff", type: string }
+          - { name: image_opacity, label: "Background photo visibility (0 = hidden, 100 = full photo)", type: number }
 
   - name: stills
     label: Stills — photo grid
