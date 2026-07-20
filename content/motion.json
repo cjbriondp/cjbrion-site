@@ -1,6 +1,13 @@
 {
   "projects": [
     {
+      "title": " Sea to Shining Sea: Sierra Ferrell",
+      "client": "Newport Folk Festival / Documentary",
+      "role": "Videographer",
+      "video_url": "https://www.youtube.com/watch?v=DuDmKto2Efk",
+      "thumbnail": "/images/STSSSierraFerrell.jpg"
+    },
+    {
       "title": "Sea to Shining Sea: Oakland Rising - No Soldiers",
       "client": "Newport Folk Festival / Documentary",
       "role": "Videographer",
