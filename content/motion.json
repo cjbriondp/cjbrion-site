@@ -1,6 +1,13 @@
 {
   "projects": [
     {
+      "title": " Sea to Shining Sea: Bruce Springsteen",
+      "client": "Newport Folk Festival / Documentary",
+      "role": "Videographer",
+      "video_url": "https://www.youtube.com/watch?v=FWXf_tp4IFY",
+      "thumbnail": "/images/STSS Bruce.jpg"
+    },
+    {
       "title": " Sea to Shining Sea: Sierra Ferrell",
       "client": "Newport Folk Festival / Documentary",
       "role": "Videographer",
