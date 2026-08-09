@@ -29,20 +29,6 @@
       "thumbnail": "/images/STSS Cover.jpg"
     },
     {
-      "title": "Lil Peep — “Awful Things”",
-      "client": "Music Video",
-      "role": "Cinematographer",
-      "video_url": "https://www.youtube.com/watch?v=zOujzvtwZ6M",
-      "thumbnail": "/images/Awful Things cover.jpg"
-    },
-    {
-      "title": "Smashing Pumpkins — “Solara”",
-      "client": "Music Video",
-      "role": "Cinematographer",
-      "video_url": "https://www.youtube.com/watch?v=Do3tSdZucyA",
-      "thumbnail": "/images/TSP copy.png"
-    },
-    {
       "title": "Mechanical Expression",
       "client": "Narrative",
       "role": "Cinematographer",
@@ -57,11 +43,32 @@
       "thumbnail": "/images/SAKSstill.jpg"
     },
     {
+      "title": "Lil Peep — “Awful Things”",
+      "client": "Music Video",
+      "role": "Cinematographer",
+      "video_url": "https://www.youtube.com/watch?v=zOujzvtwZ6M",
+      "thumbnail": "/images/Awful Things cover.jpg"
+    },
+    {
+      "title": "Smashing Pumpkins — “Solara”",
+      "client": "Music Video",
+      "role": "Cinematographer",
+      "video_url": "https://www.youtube.com/watch?v=Do3tSdZucyA",
+      "thumbnail": "/images/TSP copy.png"
+    },
+    {
       "title": "Samsung — TVC",
       "client": "Commercial",
       "role": "Cinematographer",
       "video_url": "https://vimeo.com/380610408/a5622416e0?share=copy&fl=sv&fe=ci",
       "thumbnail": "/images/Zlatan Samsung  PSD-1.jpg"
+    },
+    {
+      "title": "Robot Heart — Diplo",
+      "client": "Culture / Documentary",
+      "role": "Cinematographer",
+      "video_url": "https://www.youtube.com/watch?v=XblsAh_jlko",
+      "thumbnail": "/images/Diplo.jpg"
     },
     {
       "title": "Marshmello × Lil Peep — “Spotlight”",
@@ -76,13 +83,6 @@
       "role": "Cinematographer",
       "video_url": "https://vimeo.com/1067540531/3360767126?share=copy&fl=sv&fe=ci",
       "thumbnail": "/images/NNRollercoasters.jpg"
-    },
-    {
-      "title": "Robot Heart — Diplo",
-      "client": "Culture / Documentary",
-      "role": "Cinematographer",
-      "video_url": "https://www.youtube.com/watch?v=XblsAh_jlko",
-      "thumbnail": "/images/Diplo.jpg"
     },
     {
       "title": "Sotheby's: An Inside Look at Jonas Wood’s Studio",
