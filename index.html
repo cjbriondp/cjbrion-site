@@ -8,18 +8,35 @@ posthog.init('phc_tvRTxvHUZzkYoeZru7c2QrCHsfoy5LsruuK6PJmvPh9C',{api_host:'https
 </script>
 </head><body>
 <div class="stage" id="stage">
-  <div class="bg"></div><div class="veil"></div>
-  <div class="id">
-    <h1>C.J. BRION</h1>
-    <div class="sub">Cinematographer + Photographer</div>
-    <div class="sub">Los Angeles / Available Worldwide</div>
+  <div class="bg"></div><div class="veil"></div><div class="scrim"></div>
+  <div class="stickybar" id="stickybar">
+    <a class="sbname" onclick="stickyHome()">C.J. BRION</a>
+    <div class="sbnav">
+      <a class="navitem" data-view="motion" onclick="showView('motion',this)">[ Motion ]</a>
+      <a class="navitem" data-view="stills" onclick="showView('stills',this)">[ Still ]</a>
+      <a class="navitem" data-view="bio" onclick="showView('bio',this)">bio</a>
+      <a class="navitem" onclick="stickyContact()">contact</a>
+      <a class="navitem" onclick="openCV()">cv</a>
+    </div>
   </div>
-  <div class="menu">
-    <div class="toggle">[ <a class="navitem" onclick="showView('motion',this)">Motion</a> ]&nbsp;&nbsp;[ <a class="navitem" onclick="showView('stills',this)">Still</a> ]</div>
-    <a class="navitem" onclick="showView('bio',this)">bio</a>
-    <div id="contactRow"><a class="navitem" onclick="showContact(this)">contact</a><span id="mailtoWrap"><a id="mailLink" href="mailto:contact@cjbrion.com">contact@cjbrion.com</a><button id="copyMail" type="button" onclick="copyEmail(this)" aria-label="Copy email address"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg></button><span id="copiedNote" aria-hidden="true">copied</span></span></div>
-    <a class="navitem" onclick="openCV()">cv</a>
+  <div class="cluster">
+    <div class="id">
+      <h1>C.J. BRION</h1>
+      <div class="sub">Cinematographer + Photographer</div>
+      <div class="sub">Los Angeles / Available Worldwide</div>
+    </div>
+    <div class="menu">
+      <div class="toggle">[ <a class="navitem" data-view="motion" onclick="showView('motion',this)">Motion</a> ]&nbsp;&nbsp;[ <a class="navitem" data-view="stills" onclick="showView('stills',this)">Still</a> ]</div>
+      <a class="navitem" data-view="bio" onclick="showView('bio',this)">bio</a>
+      <div id="contactRow"><a class="navitem" onclick="showContact(this)">contact</a><span id="mailtoWrap"><a id="mailLink" href="mailto:contact@cjbrion.com">contact@cjbrion.com</a><button id="copyMail" type="button" onclick="copyEmail(this)" aria-label="Copy email address"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg></button><span id="copiedNote" aria-hidden="true">copied</span></span></div>
+      <a class="navitem" onclick="openCV()">cv</a>
+      <div class="socials">
+        <a id="igLink" aria-label="Instagram"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.4"></circle><circle cx="17.6" cy="6.4" r="1.05" fill="currentColor" stroke="none"></circle></svg></a>
+        <a id="imdbLink" aria-label="IMDb"><svg viewBox="0 0 44 22" width="42" height="21" fill="none"><rect x="1" y="1" width="42" height="20" rx="4" stroke="currentColor" stroke-width="1.8"></rect><text x="22" y="15.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="currentColor" letter-spacing=".5">IMDb</text></svg></a>
+      </div>
+    </div>
   </div>
+  <div id="navSentinel"></div>
   <div class="panel" id="bio"><div class="port"><span>Portrait<br>— from Bio pics —</span></div><div class="txt"></div></div>
   <div class="panel" id="motion"></div>
   <div class="panel" id="stills"><div class="brick"></div></div>
