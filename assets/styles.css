@@ -1,25 +1,36 @@
-:root{--ink:#000;--paper:#fff;--veil:.86;--sans:'Helvetica Neue',Helvetica,Arial,sans-serif}
+:root{--ink:#000;--paper:#fff;--veil:.70;--sans:'Helvetica Neue',Helvetica,Arial,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);overflow:hidden}
 a{color:inherit;text-decoration:none}
 .stage{position:fixed;inset:0;overflow:hidden;isolation:isolate}
 .bg{position:absolute;inset:0;z-index:0}
-.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.8s ease}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 2.6s ease;will-change:transform,opacity;animation:drift 18s ease-in-out infinite alternate}
+.slide:nth-child(even){animation-name:driftB;animation-duration:21s}
 .slide.on{opacity:1}
+@keyframes drift{from{transform:scale(1.03)}to{transform:scale(1.11) translate(-1.2%,.8%)}}
+@keyframes driftB{from{transform:scale(1.1) translate(1%,-.6%)}to{transform:scale(1.03)}}
+@media(prefers-reduced-motion:reduce){.slide{animation:none;transition-duration:.8s}}
 .veil{position:absolute;inset:0;z-index:1;background:var(--paper);opacity:var(--veil,.86);transition:opacity .5s ease}
+.scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.4) 30%,transparent 55%);background:linear-gradient(90deg,color-mix(in srgb,var(--paper) 62%,transparent) 0%,color-mix(in srgb,var(--paper) 40%,transparent) 30%,transparent 55%)}
 .stage.view .veil{opacity:calc(var(--veil,.86) + .06)}
-.id{position:absolute;left:5vw;top:45vh;z-index:6}
+.cluster{position:absolute;left:5vw;top:40vh;z-index:6}
 .id h1{font-size:30px;font-weight:700;letter-spacing:.005em;line-height:1.15}
 .id .sub{font-size:19px;font-weight:400;line-height:1.35}
 .toggle{font-size:19px;letter-spacing:.01em}
 .toggle a,.menu a{cursor:pointer}
 .toggle a:hover,.menu a:hover{opacity:.55}
 .navitem.active{text-decoration:underline;text-underline-offset:5px}
-.menu{position:absolute;left:5vw;top:73vh;z-index:6;display:flex;flex-direction:column;gap:7px;font-size:19px}
+.menu{margin-top:34px;display:flex;flex-direction:column;gap:7px;font-size:19px}
 .menu a{width:max-content}
 /* Text that can overlap photos auto-inverts against whatever is behind it (stays legible over light veil or dark images) */
-.id,.menu{color:#fff;mix-blend-mode:difference}
+.cluster{color:#fff;mix-blend-mode:difference}
+#navSentinel{height:1px;margin-top:-1px}
+.socials{display:flex;align-items:center;gap:16px;margin-top:12px}
+.socials a{display:none;align-items:center;opacity:.85;transition:opacity .2s ease;cursor:pointer}
+.socials a:hover{opacity:.5}
+.socials svg{display:block}
+.stickybar{display:none}
 #contactRow{display:flex;align-items:baseline}
 #mailtoWrap{opacity:0;transform:translateX(-6px);transition:all .35s ease;pointer-events:none;margin-left:16px;display:inline-flex;align-items:center}
 #mailtoWrap.on{opacity:1;transform:none;pointer-events:auto}
@@ -67,13 +78,15 @@ a{color:inherit;text-decoration:none}
  html,body{height:auto}
  body{overflow-y:auto;overflow-x:hidden}
  .stage{position:relative;min-height:100vh;overflow:visible}
- .bg,.veil{position:fixed}
- .id{position:relative;z-index:6;left:auto;top:auto;padding:12vh 7vw 0}
+ .bg,.veil,.scrim{position:fixed}
+ .scrim{background:linear-gradient(180deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.38) 34%,transparent 62%);background:linear-gradient(180deg,color-mix(in srgb,var(--paper) 62%,transparent) 0%,color-mix(in srgb,var(--paper) 38%,transparent) 34%,transparent 62%)}
+ .cluster{position:relative;z-index:6;left:auto;top:auto;padding:9vh 7vw 0}
+ .id{position:static;padding:0}
  .id h1{font-size:34px}
  .id .sub{font-size:17px}
  .toggle{font-size:18px;padding-left:0}
  .toggle a{padding:2px 0}
- .menu{position:relative;z-index:6;left:auto;top:auto;padding:24px 7vw 7vh;font-size:19px;gap:14px}
+ .menu{position:static;margin-top:26px;padding:0 0 6vh;font-size:19px;gap:14px}
  #contactRow{flex-wrap:wrap}
  #mailtoWrap{margin-left:0;font-size:15px;flex-basis:100%;max-height:0;margin-top:0;overflow:hidden;transition:max-height .3s ease,margin-top .3s ease,opacity .3s ease}
  #mailtoWrap.on{max-height:6em;margin-top:6px;overflow:visible}
@@ -93,4 +106,18 @@ a{color:inherit;text-decoration:none}
  #motion,#stills{width:90%;padding-left:2vw}
  #stills .brick{columns:1}
  .id h1{font-size:30px}
+}
+
+/* ---------- Sticky nav bar: follows the scroll in the stacked layout ---------- */
+@media(max-width:1024px){
+ .stickybar{display:flex;position:fixed;top:0;left:0;right:0;z-index:40;align-items:baseline;justify-content:space-between;gap:14px;padding:12px 7vw;background:var(--paper);background:color-mix(in srgb,var(--paper) 88%,transparent);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);border-bottom:1px solid rgba(0,0,0,.08);transform:translateY(-110%);transition:transform .28s ease;font-size:13.5px}
+ .stickybar.on{transform:translateY(0)}
+ .sbname{font-weight:700;letter-spacing:.02em;cursor:pointer;white-space:nowrap}
+ .sbnav{display:flex;gap:13px;white-space:nowrap}
+ .sbnav a{cursor:pointer}
+ .sbnav a:hover{opacity:.55}
+}
+@media(max-width:540px){
+ .sbname{display:none}
+ .stickybar{justify-content:center;padding:12px 3vw}
 }

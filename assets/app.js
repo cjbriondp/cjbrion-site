@@ -48,6 +48,10 @@ async function load(){
   // contact
   var mailLink=document.getElementById('mailLink'); if(mailLink){mailLink.textContent=settings.email; mailLink.href='mailto:'+settings.email; mailLink.addEventListener('click',function(){track('email_clicked',{via:'mailto'});});}
   var copyBtn=document.getElementById('copyMail'); if(copyBtn){copyBtn.setAttribute('data-email',settings.email);}
+  // socials — render only when a URL is set in the CMS
+  function wireSocial(id,url,net){var a=document.getElementById(id); if(a&&url){a.href=url;a.target='_blank';a.rel='noopener';a.style.display='inline-flex';a.addEventListener('click',function(){track('social_clicked',{network:net});});}}
+  wireSocial('igLink',settings.instagram,'instagram');
+  wireSocial('imdbLink',settings.imdb,'imdb');
   // stills grid
   const brick=document.querySelector('#stills .brick'); brick.innerHTML='';
   (stills.images||[]).forEach(src=>{
@@ -77,12 +81,14 @@ function hideAll(){Object.values(PANELS).forEach(id=>document.getElementById(id)
 window.goHome=function(){current=null;clearNav();stage.classList.remove('view');hideAll();trackSection('home');};
 window.showView=function(name,el){
   if(current===name){goHome();return;}
-  current=name;clearNav();if(el)el.classList.add('active');stage.classList.add('view');hideAll();
+  current=name;clearNav();document.querySelectorAll('.navitem[data-view="'+name+'"]').forEach(function(n){n.classList.add('active')});stage.classList.add('view');hideAll();
   var p=document.getElementById(PANELS[name]);void p.offsetWidth;p.classList.add('on');trackSection(name);
   if(window.innerWidth<=862){setTimeout(function(){p.scrollIntoView({behavior:'smooth',block:'start'});},60);}
 };
 window.showContact=function(el){if(current==='contact'){goHome();return;}current='contact';clearNav();el.classList.add('active');stage.classList.add('view');Object.values(PANELS).forEach(id=>document.getElementById(id).classList.remove('on'));document.getElementById('mailtoWrap').classList.add('on');trackSection('contact');track('contact_opened');};
 window.openCV=function(){track('cv_opened');trackSection('cv');window.open('CJ_Brion_CV.pdf','_blank');};
+window.stickyHome=function(){goHome();window.scrollTo({top:0,behavior:'smooth'});};
+window.stickyContact=function(){var el=document.querySelector('#contactRow .navitem');if(current!=='contact'){showContact(el);}setTimeout(function(){document.getElementById('contactRow').scrollIntoView({behavior:'smooth',block:'center'});},80);};
 window.copyEmail=function(btn){track('email_copied');
   var ml=document.getElementById('mailLink');
   var em=(btn&&btn.getAttribute('data-email'))||(ml?ml.textContent:'');
@@ -94,9 +100,14 @@ window.copyEmail=function(btn){track('email_copied');
 
 document.addEventListener('DOMContentLoaded',function(){
   stage=document.getElementById('stage');
+  // sticky nav: appears once the user scrolls past the menu cluster (stacked layout)
+  var sent=document.getElementById('navSentinel'),bar=document.getElementById('stickybar');
+  if(sent&&bar&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){var e=es[0];bar.classList.toggle('on',!e.isIntersecting&&e.boundingClientRect.top<0);}).observe(sent);
+  }
   load().then(function(){
     var slides=[].slice.call(document.querySelectorAll('.slide'));var si=0;
-    if(slides.length>1){setInterval(function(){slides[si].classList.remove('on');si=(si+1)%slides.length;slides[si].classList.add('on');},5200);}
+    if(slides.length>1){setInterval(function(){slides[si].classList.remove('on');si=(si+1)%slides.length;slides[si].classList.add('on');},6500);}
   });
 });
 })();
