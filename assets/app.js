@@ -72,20 +72,59 @@ async function load(){
     const mt=document.createElement('div'); mt.className='vmeta'; mt.innerHTML='<span>'+(pr.client||'')+'</span><span>'+(pr.role||'')+'</span>';
     a.appendChild(th); a.appendChild(mt); mo.appendChild(a);
   });
+  renderHome(motion,stills);
+}
+
+// home: all motion thumbnails 3-wide, then the featured (most contrast + color) stills
+var FEATURED=['CJB04518','8.54','CJB00550','10.56.58','BOS_HOKA','CJB01293','hoka_08','L1021576','GYM06824'];
+function renderHome(motion,stills){
+  var hr=document.getElementById('homeReels'); if(!hr)return; hr.innerHTML='';
+  (motion.projects||[]).forEach(function(pr){
+    var a=document.createElement('a'); a.className='gv';
+    if(pr.video_url){a.href=pr.video_url;a.target='_blank';a.rel='noopener';a.addEventListener('click',function(){track('reel_clicked',{title:pr.title||'',client:pr.client||'',role:pr.role||'',url:pr.video_url,via:'home'});});}
+    else{a.onclick=function(){return false;};}
+    var bg=document.createElement('div'); bg.className='tilebg'; if(pr.thumbnail)bg.style.backgroundImage='url("'+encodeURI(pr.thumbnail)+'")';
+    a.appendChild(bg);
+    var pl=document.createElement('span'); pl.className='play'; pl.textContent='▶'; a.appendChild(pl);
+    var t=document.createElement('span'); t.className='gt'; t.textContent=pr.title||''; a.appendChild(t);
+    hr.appendChild(a);
+  });
+  var hs=document.getElementById('homeStills'); if(!hs)return; hs.innerHTML='';
+  var imgs=stills.images||[];
+  FEATURED.forEach(function(key){
+    var src=null;
+    for(var i=0;i<imgs.length;i++){if(imgs[i].indexOf(key)>=0){src=imgs[i];break;}}
+    if(!src)return;
+    var a=document.createElement('a'); a.className='gph';
+    var bg=document.createElement('div'); bg.className='tilebg'; bg.style.backgroundImage='url("'+encodeURI(src)+'")';
+    a.appendChild(bg);
+    a.addEventListener('click',function(){openLightbox(src); track('still_opened',{src:src,via:'home'});});
+    hs.appendChild(a);
+  });
+}
+function openLightbox(src){
+  var lb=document.getElementById('lightbox'); if(!lb)return;
+  document.getElementById('lightboxImg').src=encodeURI(src);
+  lb.classList.add('on'); lb.setAttribute('aria-hidden','false');
+}
+function closeLightbox(){
+  var lb=document.getElementById('lightbox'); if(!lb)return;
+  lb.classList.remove('on'); lb.setAttribute('aria-hidden','true');
 }
 
 var stage,current=null;
-const PANELS={motion:'motion',stills:'stills',bio:'bio'};
+const PANELS={home:'home',motion:'motion',stills:'stills',bio:'bio'};
 function clearNav(){document.querySelectorAll('.navitem').forEach(n=>n.classList.remove('active'));}
 function hideAll(){Object.values(PANELS).forEach(id=>document.getElementById(id).classList.remove('on'));document.getElementById('mailtoWrap').classList.remove('on');}
-window.goHome=function(){current=null;clearNav();stage.classList.remove('view');hideAll();trackSection('home');};
+function showHome(){var p=document.getElementById('home');void p.offsetWidth;p.classList.add('on');stage.classList.add('view');}
+window.goHome=function(){current=null;clearNav();hideAll();showHome();trackSection('home');};
 window.showView=function(name,el){
   if(current===name){goHome();return;}
   current=name;clearNav();document.querySelectorAll('.navitem[data-view="'+name+'"]').forEach(function(n){n.classList.add('active')});stage.classList.add('view');hideAll();
   var p=document.getElementById(PANELS[name]);void p.offsetWidth;p.classList.add('on');trackSection(name);
   if(window.innerWidth<=862){setTimeout(function(){p.scrollIntoView({behavior:'smooth',block:'start'});},60);}
 };
-window.showContact=function(el){if(current==='contact'){goHome();return;}current='contact';clearNav();el.classList.add('active');stage.classList.add('view');Object.values(PANELS).forEach(id=>document.getElementById(id).classList.remove('on'));document.getElementById('mailtoWrap').classList.add('on');trackSection('contact');track('contact_opened');};
+window.showContact=function(el){if(current==='contact'){goHome();return;}current='contact';clearNav();el.classList.add('active');stage.classList.add('view');Object.values(PANELS).forEach(id=>document.getElementById(id).classList.remove('on'));document.getElementById('home').classList.add('on');document.getElementById('mailtoWrap').classList.add('on');trackSection('contact');track('contact_opened');};
 window.openCV=function(){track('cv_opened');trackSection('cv');window.open('CJ_Brion_CV.pdf','_blank');};
 window.stickyHome=function(){goHome();window.scrollTo({top:0,behavior:'smooth'});};
 window.stickyContact=function(){var el=document.querySelector('#contactRow .navitem');if(current!=='contact'){showContact(el);}setTimeout(function(){document.getElementById('contactRow').scrollIntoView({behavior:'smooth',block:'center'});},80);};
@@ -100,6 +139,10 @@ window.copyEmail=function(btn){track('email_copied');
 
 document.addEventListener('DOMContentLoaded',function(){
   stage=document.getElementById('stage');
+  showHome();
+  var lb=document.getElementById('lightbox');
+  if(lb){lb.addEventListener('click',closeLightbox);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});}
   // sticky nav: appears once the user scrolls past the menu cluster (stacked layout)
   var sent=document.getElementById('navSentinel'),bar=document.getElementById('stickybar');
   if(sent&&bar&&'IntersectionObserver' in window){
