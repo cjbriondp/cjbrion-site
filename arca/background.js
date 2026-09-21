@@ -1,6 +1,17 @@
 (() => {
   'use strict';
 
+  // Shuffle the Trusted By wall so every visit shows a random order.
+  const grid = document.querySelector('.logo-grid');
+  if (grid) {
+    const items = Array.from(grid.children);
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+    items.forEach(el => grid.appendChild(el));
+  }
+
   // Preserve the approved webpage's slow rotation: about 14.6 seconds per turn.
   const HEAD_PLAYBACK_RATE = 0.65;
   const root = document.documentElement;
