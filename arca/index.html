@@ -1,481 +1,32 @@
-<title>Arca Cerebrum</title>
-<!-- Commercial video production — landing page -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Chakra+Petch:wght@300;400;600&display=swap">
-<style>
-  :root {
-    --room-pit: #0a0a0c;
-    --room-mid: #17161a;
-    --room-wall: #57503f;
-    --room-glow: #8a8172;
-    --paper: #efebe0;
-    --paper-dim: rgba(239, 235, 224, 0.55);
-    --red: #d8302f;
-    --tan: #c9bfa8;
-    --line: rgba(239, 235, 224, 0.14);
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--room-pit);
-    color: var(--paper);
-    font-family: "Chakra Petch", "Trebuchet MS", system-ui, sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-
-  /* ============ THE ROOM ============ */
-  .room {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    background:
-      radial-gradient(140% 100% at 50% -20%, rgba(239,235,224,0.32) 0%, rgba(239,235,224,0.10) 28%, transparent 55%),
-      radial-gradient(90% 70% at 50% 115%, rgba(138,129,114,0.20) 0%, transparent 55%),
-      radial-gradient(75% 75% at 50% 46%, var(--room-pit) 0%, var(--room-pit) 34%, var(--room-mid) 58%, #2b2822 80%, var(--room-wall) 97%);
-  }
-  /* corner washes — distant walls catching light */
-  .room::before, .room::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 40vw;
-    height: 70vh;
-    pointer-events: none;
-  }
-  .room::before {
-    left: 0;
-    background: radial-gradient(80% 80% at 0% 0%, rgba(201,191,168,0.22), transparent 70%);
-  }
-  .room::after {
-    right: 0;
-    background: radial-gradient(80% 80% at 100% 0%, rgba(201,191,168,0.22), transparent 70%);
-  }
-
-  /* faint floor line to give the void a ground */
-  .floor {
-    position: fixed;
-    left: 50%;
-    bottom: 6vh;
-    width: min(72vw, 900px);
-    height: 12vh;
-    transform: translateX(-50%);
-    background: radial-gradient(50% 50% at 50% 50%, rgba(239,235,224,0.05), transparent 70%);
-    z-index: 0;
-  }
-
-  /* ============ SKULL RIG ============ */
-  .stage {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 1100px;
-    pointer-events: none;
-  }
-  .bob {
-    animation: bob 9s ease-in-out infinite alternate;
-  }
-  .rig {
-    position: relative;
-    width: min(68vh, 84vw);
-    aspect-ratio: 1 / 1;
-    transform-style: preserve-3d;
-    animation: sway 18s ease-in-out infinite alternate;
-  }
-  .rig video, .rig img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    user-select: none;
-  }
-
-  /* base: grayscale head */
-  .sk-gray {
-    filter: grayscale(1) brightness(1.02) contrast(1.04);
-    opacity: 0.96;
-    animation: basejitter 9s steps(1) infinite;
-  }
-
-  /* color washing through slowly — the blocks surface, then recede */
-  .sk-color {
-    -webkit-mask-image: linear-gradient(72deg, transparent 43%, #000 48%, #000 52%, transparent 57%);
-    mask-image: linear-gradient(72deg, transparent 43%, #000 48%, #000 52%, transparent 57%);
-    -webkit-mask-size: 320% 100%;
-    mask-size: 320% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    animation: colorsweep 13s ease-in-out infinite;
-  }
-
-  /* glitch burst: full-color slices snap in briefly */
-  .sk-slices {
-    opacity: 0;
-    animation: slices 9s steps(1) infinite;
-  }
-
-  @keyframes bob {
-    from { transform: translateY(-1.6vh); }
-    to   { transform: translateY(1.6vh); }
-  }
-  @keyframes sway {
-    from { transform: rotateY(-6deg) rotateZ(-1.2deg); }
-    to   { transform: rotateY(6deg) rotateZ(1.2deg); }
-  }
-  @keyframes colorsweep {
-    0%   { -webkit-mask-position: 0% 0; mask-position: 0% 0; opacity: 0; }
-    12%  { opacity: 0.8; }
-    50%  { opacity: 0.8; }
-    88%  { opacity: 0.8; }
-    100% { -webkit-mask-position: 100% 0; mask-position: 100% 0; opacity: 0; }
-  }
-  @keyframes slices {
-    0%, 43.9% { opacity: 0; }
-    44% { opacity: 1; clip-path: inset(12% 0 74% 0); transform: translateX(-1.5%); }
-    45% { opacity: 1; clip-path: inset(58% 0 22% 0); transform: translateX(1.2%); }
-    46% { opacity: 1; clip-path: inset(30% 0 48% 0); transform: translateX(-0.8%); }
-    47%, 77.9% { opacity: 0; }
-    78% { opacity: 1; clip-path: inset(66% 0 10% 0); transform: translateX(1.6%); }
-    79% { opacity: 1; clip-path: inset(8% 0 80% 0); transform: translateX(-1%); }
-    80%, 100% { opacity: 0; }
-  }
-  @keyframes basejitter {
-    0%, 43.9% { transform: none; }
-    44% { transform: translateX(-0.8%); }
-    45% { transform: translateX(0.6%); }
-    46% { transform: translateX(-0.4%); }
-    47%, 77.9% { transform: none; }
-    78% { transform: translateX(1%); }
-    79% { transform: translateX(-0.6%); }
-    80%, 100% { transform: none; }
-  }
-
-  /* drifting debris fragments */
-  .frag {
-    position: fixed;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.5;
-    animation: fragdrift var(--d, 18s) ease-in-out infinite alternate;
-  }
-  .frag svg { display: block; }
-  @keyframes fragdrift {
-    from { transform: translate(0, 0) rotate(0deg); }
-    to   { transform: translate(var(--dx, 20px), var(--dy, -30px)) rotate(var(--rot, 40deg)); }
-  }
-
-  /* ============ CRT OVERLAY ============ */
-  .crt {
-    position: fixed;
-    inset: 0;
-    z-index: 3;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(0,0,0,0)   0px,
-      rgba(0,0,0,0)   2px,
-      rgba(0,0,0,0.22) 3px,
-      rgba(0,0,0,0)   4px
-    );
-    mix-blend-mode: multiply;
-  }
-  .crt-band {
-    position: fixed;
-    left: 0;
-    right: 0;
-    height: 22vh;
-    z-index: 3;
-    pointer-events: none;
-    background: linear-gradient(to bottom, transparent, rgba(239,235,224,0.045) 45%, rgba(239,235,224,0.06) 50%, rgba(239,235,224,0.045) 55%, transparent);
-    animation: scanband 8s linear infinite;
-  }
-  @keyframes scanband {
-    from { top: -25vh; }
-    to   { top: 105vh; }
-  }
-  .crt-flicker {
-    position: fixed;
-    inset: 0;
-    z-index: 3;
-    pointer-events: none;
-    background: var(--paper);
-    opacity: 0;
-    animation: flick 7s steps(1) infinite;
-  }
-  @keyframes flick {
-    0%, 61.9% { opacity: 0; }
-    62% { opacity: 0.025; }
-    62.4% { opacity: 0; }
-    63% { opacity: 0.02; }
-    63.3%, 100% { opacity: 0; }
-  }
-  /* curved-glass vignette */
-  .crt-vig {
-    position: fixed;
-    inset: 0;
-    z-index: 3;
-    pointer-events: none;
-    background: radial-gradient(135% 135% at 50% 50%, transparent 60%, rgba(0,0,0,0.38) 100%);
-  }
-
-  /* ============ CONTENT ============ */
-  .content {
-    position: relative;
-    z-index: 2;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    padding-inline: clamp(16px, 5vw, 64px);
-  }
-
-  header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    padding-block: clamp(18px, 3vh, 32px) 0;
-  }
-  .wordmark {
-    font-family: "Michroma", "Chakra Petch", sans-serif;
-    font-size: clamp(13px, 1.6vw, 17px);
-    letter-spacing: 0.32em;
-    color: var(--paper);
-    white-space: nowrap;
-  }
-  .wordmark b { font-weight: 400; color: var(--red); }
-  .tagline {
-    font-family: "Michroma", sans-serif;
-    font-size: clamp(8px, 1vw, 10px);
-    letter-spacing: 0.42em;
-    color: var(--paper-dim);
-    white-space: nowrap;
-  }
-
-  .hero {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding-block: 8vh;
-    background: radial-gradient(58% 58% at 50% 50%, rgba(10,10,12,0.55) 0%, rgba(10,10,12,0.3) 55%, transparent 78%);
-  }
-  .eyebrow {
-    font-family: "Michroma", sans-serif;
-    font-size: clamp(9px, 1.1vw, 11px);
-    letter-spacing: 0.5em;
-    text-indent: 0.5em;
-    color: var(--tan);
-    opacity: 0.8;
-    margin: 0 0 2.2vh;
-  }
-  h1 {
-    position: relative;
-    font-family: "Michroma", "Chakra Petch", sans-serif;
-    font-weight: 400;
-    font-size: clamp(26px, 5.6vw, 74px);
-    line-height: 1.14;
-    letter-spacing: 0.06em;
-    margin: 0;
-    text-wrap: balance;
-    text-shadow: 0 0 32px rgba(10,10,12,0.9), 0 0 4px rgba(10,10,12,0.8);
-  }
-  /* glitch echoes on the headline */
-  h1::before, h1::after {
-    content: attr(data-text);
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
-  h1::before {
-    color: var(--red);
-    animation: h1r 6s steps(1) infinite;
-  }
-  h1::after {
-    color: #4fd8d0;
-    animation: h1c 6s steps(1) infinite;
-  }
-  @keyframes h1r {
-    0%, 55.9% { opacity: 0; }
-    56% { opacity: 0.75; transform: translate(-3px, 1px); clip-path: inset(10% 0 55% 0); }
-    57% { opacity: 0.75; transform: translate(2px, -1px); clip-path: inset(60% 0 15% 0); }
-    58%, 100% { opacity: 0; }
-  }
-  @keyframes h1c {
-    0%, 55.9% { opacity: 0; }
-    56% { opacity: 0.6; transform: translate(3px, -1px); clip-path: inset(55% 0 20% 0); }
-    57% { opacity: 0.6; transform: translate(-2px, 1px); clip-path: inset(5% 0 70% 0); }
-    58%, 100% { opacity: 0; }
-  }
-
-  .lede {
-    max-width: 52ch;
-    font-size: clamp(14px, 1.5vw, 17px);
-    line-height: 1.7;
-    color: rgba(239, 235, 224, 0.72);
-    margin: 3vh 0 0;
-    text-shadow: 0 0 6px rgba(10,10,12,0.95), 0 0 18px rgba(10,10,12,0.9), 0 0 36px rgba(10,10,12,0.85);
-  }
-  .services {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px 0;
-    margin-top: 3.4vh;
-    font-family: "Michroma", sans-serif;
-    font-size: clamp(8px, 1vw, 10px);
-    letter-spacing: 0.28em;
-    color: var(--tan);
-  }
-  .services span { padding: 0 1.2em; }
-  .services span + span { border-left: 1px solid var(--line); }
-
-  .cta {
-    display: inline-block;
-    margin-top: 4.6vh;
-    padding: 15px 42px;
-    font-family: "Michroma", sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.34em;
-    text-indent: 0.34em;
-    text-decoration: none;
-    color: var(--paper);
-    border: 1px solid rgba(239,235,224,0.4);
-    background: rgba(10,10,12,0.35);
-    transition: border-color 0.25s, color 0.25s, box-shadow 0.25s;
-  }
-  .cta:hover, .cta:focus-visible {
-    border-color: var(--red);
-    color: #fff;
-    box-shadow: 0 0 24px rgba(216,48,47,0.35), inset 0 0 14px rgba(216,48,47,0.15);
-    outline: none;
-  }
-
-  /* ============ CLIENT WALL ============ */
-  .clients {
-    position: relative;
-    z-index: 2;
-    padding: 10vh clamp(16px, 5vw, 64px) 12vh;
-    background: linear-gradient(to bottom, transparent, rgba(10,10,12,0.55) 24%, rgba(10,10,12,0.55) 76%, transparent);
-  }
-  .clients-head {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    max-width: 1100px;
-    margin: 0 auto 7vh;
-  }
-  .clients-head h2 {
-    font-family: "Michroma", sans-serif;
-    font-weight: 400;
-    font-size: clamp(10px, 1.2vw, 12px);
-    letter-spacing: 0.5em;
-    color: var(--tan);
-    margin: 0;
-    white-space: nowrap;
-  }
-  .clients-head::before, .clients-head::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
-
-  .logo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 6vh 2vw;
-    max-width: 1100px;
-    margin: 0 auto;
-    align-items: center;
-    justify-items: center;
-  }
-  .client {
-    color: var(--paper-dim);
-    transition: color 0.3s, opacity 0.3s, filter 0.3s;
-    filter: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-  }
-  .client:hover {
-    color: var(--paper);
-    filter: drop-shadow(0 0 10px rgba(239,235,224,0.25));
-  }
-  .client svg { display: block; fill: currentColor; }
-
-  .lm {
-    font-size: 21px;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-  }
-  .lm-oracle    { font-weight: 600; letter-spacing: 0.18em; font-size: 19px; }
-  .lm-tanium    { font-weight: 600; letter-spacing: 0.3em; font-size: 17px; }
-  .lm-twilio    { font-weight: 600; font-size: 20px; text-transform: lowercase; }
-  .lm-anaplan   { font-weight: 400; font-size: 20px; text-transform: capitalize; letter-spacing: 0.04em; }
-  .lm-servicetitan { font-weight: 600; font-size: 17px; }
-  .lm-netflix   { font-family: "Michroma", sans-serif; font-size: 18px; letter-spacing: 0.12em; transform: scaleY(1.35); }
-  .lm-newrelic  { font-weight: 300; font-size: 20px; letter-spacing: 0.02em; }
-  .lm-newrelic b { font-weight: 600; }
-  .lm-cloudflare { font-weight: 600; font-size: 19px; letter-spacing: 0.03em; }
-  .lm-summit    { font-weight: 300; font-size: 19px; letter-spacing: 0.42em; text-indent: 0.42em; }
-  .lm-thegrove  { font-weight: 400; font-size: 18px; letter-spacing: 0.24em; text-indent: 0.24em; }
-
-  footer {
-    position: relative;
-    z-index: 2;
-    padding: 0 clamp(16px, 5vw, 64px) calc(5vh + env(safe-area-inset-bottom, 0px));
-    text-align: center;
-    font-family: "Michroma", sans-serif;
-    font-size: 8px;
-    letter-spacing: 0.34em;
-    color: rgba(239,235,224,0.35);
-  }
-
-  @media (max-width: 620px) {
-    header { flex-direction: column; align-items: center; gap: 8px; }
-    .rig { width: 86vw; }
-    .services span { border: 0 !important; padding: 0 0.8em; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .bob, .rig, .sk-gray, .sk-color, .sk-slices,
-    .crt-band, .crt-flicker, .frag,
-    h1::before, h1::after { animation: none !important; }
-    .sk-color { opacity: 0.5; }
-  }
-</style>
-
-<div class="room"></div>
-<div class="floor"></div>
-
+<!doctype html>
+<html lang="en" data-motion="paused" data-paused="true">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Arca Cerebrum — commercial video production, brand films, product launches, event coverage and specialty production.">
+  <title>Arca Cerebrum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Chakra+Petch:wght@300;400;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="background.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="room" aria-hidden="true"></div>
+<div class="floor" aria-hidden="true"></div>
+<div class="haze" aria-hidden="true"></div>
+<div class="head-glow" aria-hidden="true"></div>
 <div class="stage" aria-hidden="true">
   <div class="bob">
     <div class="rig">
-      <video class="sk-gray" muted autoplay loop playsinline preload="auto">
-        <source src="head-hevc.mp4" type='video/mp4; codecs="hvc1"'>
-        <source src="head.webm" type='video/webm; codecs="vp9"'>
-      </video>
-      <video class="sk-color" muted autoplay loop playsinline preload="auto">
-        <source src="head-hevc.mp4" type='video/mp4; codecs="hvc1"'>
-        <source src="head.webm" type='video/webm; codecs="vp9"'>
-      </video>
-      <video class="sk-slices" muted autoplay loop playsinline preload="auto">
-        <source src="head-hevc.mp4" type='video/mp4; codecs="hvc1"'>
-        <source src="head.webm" type='video/webm; codecs="vp9"'>
-      </video>
+      <img class="head-poster" src="assets/head-poster.jpg" width="960" height="960" alt="" fetchpriority="high">
+      <video class="head-video" data-src="assets/head-turntable-crt.mp4" muted loop playsinline preload="none" disablepictureinpicture tabindex="-1"></video>
+      <div class="head-scanlines"></div>
     </div>
   </div>
 </div>
-
 <!-- drifting debris fragments -->
 <div class="frag" style="left:16%; top:24%; --d:22s; --dx:34px; --dy:-40px; --rot:60deg;" aria-hidden="true">
   <svg width="14" height="14" viewBox="0 0 14 14"><polygon points="0,14 7,0 14,14" fill="#d8302f" opacity="0.55"/></svg>
@@ -496,6 +47,7 @@
   <svg width="7" height="7" viewBox="0 0 7 7"><polygon points="0,7 7,7 7,0" fill="#d8302f" opacity="0.35"/></svg>
 </div>
 
+<main id="main">
 <div class="content">
   <header>
     <div class="wordmark">ARCA <b>CEREBRUM</b></div>
@@ -514,8 +66,8 @@
 
 </div>
 
-<section class="clients">
-  <div class="clients-head"><h2>TRUSTED BY</h2></div>
+<section class="clients" aria-labelledby="clients-title">
+  <div class="clients-head"><h2 id="clients-title">TRUSTED BY</h2></div>
   <div class="logo-grid">
     <div class="client" title="Apple">
       <svg width="26" height="32" viewBox="0 0 26 32" aria-label="Apple">
@@ -567,25 +119,13 @@
   </div>
 </section>
 
+</main>
 <footer>ARCA CEREBRUM · CREATIVITY EX MACHINA</footer>
 
-<script>
-(() => {
-  const vids = Array.from(document.querySelectorAll('.rig video'));
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) {
-    vids.forEach(v => { v.removeAttribute('autoplay'); v.pause(); v.currentTime = 1.2; });
-    return;
-  }
-  const base = vids[0];
-  // keep the glitch layers locked to the base rotation
-  setInterval(() => {
-    vids.slice(1).forEach(v => {
-      if (Math.abs(v.currentTime - base.currentTime) > 0.08) v.currentTime = base.currentTime;
-    });
-  }, 2500);
-  const kick = () => vids.forEach(v => v.play().catch(() => {}));
-  kick();
-  document.addEventListener('click', kick, { once: true });
-})();
-</script>
+
+<button class="motion-toggle" type="button" aria-label="Play background motion" hidden>
+  <span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Play motion</span>
+</button>
+<p class="sr-only" id="motion-status" role="status"></p>
+</body>
+</html>
