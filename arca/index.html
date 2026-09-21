@@ -560,10 +560,12 @@
   const rig = document.querySelector('.rig');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // HEVC+alpha first (plays with transparency in Safari and Chrome on Mac);
-  // browsers without HEVC error out and swap to the VP9+alpha WebM.
-  // If the base layer exhausts both, fall back to the static skull image.
-  const order = ['head-hevc.mp4', 'head.webm'];
+  // Browsers disagree on which alpha video they honor (some decode the HEVC
+  // but drop its alpha, leaving a black box; same story for VP9 elsewhere).
+  // So probe each candidate offscreen: draw a frame to a canvas and check the
+  // corners really are transparent. Use the first file that passes; if neither
+  // does, fall back to the static skull image. Never show a black box.
+  const candidates = ['head-hevc.mp4', 'head.webm'];
 
   const fallbackToImage = () => {
     if (rig.dataset.static) return;
@@ -574,24 +576,46 @@
       '<img class="sk-slices" src="skull.png" alt="">';
   };
 
-  vids.forEach(v => {
-    let i = 0;
-    v.addEventListener('error', () => {
-      i += 1;
-      if (i < order.length) {
-        v.src = order[i];
-        if (!reduced) v.play().catch(() => {});
-      } else if (v === vids[0]) {
-        fallbackToImage();
-      }
-    });
-    v.src = order[0];
-  });
+  const frameHasAlpha = (v) => {
+    try {
+      const c = document.createElement('canvas');
+      c.width = 32; c.height = 32;
+      const ctx = c.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(v, 0, 0, 32, 32);
+      let clear = 0;
+      [[2, 2], [29, 2], [2, 29], [29, 29]].forEach(([x, y]) => {
+        if (ctx.getImageData(x, y, 1, 1).data[3] < 16) clear += 1;
+      });
+      return clear >= 2;
+    } catch (e) {
+      return true; // can't inspect — trust the video rather than hide it
+    }
+  };
 
-  // Safety net: if nothing has decoded after 12s and the base video is dead, go static.
-  setTimeout(() => {
-    if (vids[0].isConnected && vids[0].readyState < 2 && vids[0].networkState === 3) fallbackToImage();
-  }, 12000);
+  const probe = (i) => {
+    if (i >= candidates.length) { fallbackToImage(); return; }
+    const p = document.createElement('video');
+    p.muted = true; p.playsInline = true; p.preload = 'auto';
+    let settled = false;
+    const next = () => { if (!settled) { settled = true; p.src = ''; probe(i + 1); } };
+    const accept = () => {
+      if (settled) return;
+      settled = true;
+      p.src = '';
+      vids.forEach(v => { v.src = candidates[i]; if (!reduced) v.play().catch(() => {}); });
+    };
+    p.addEventListener('error', next);
+    p.addEventListener('loadeddata', () => {
+      const check = () => frameHasAlpha(p) ? accept() : next();
+      // nudge off frame 0 so a real frame is decoded before sampling
+      p.currentTime = 0.4;
+      p.addEventListener('seeked', check, { once: true });
+      setTimeout(check, 1500); // seeked never fired — sample whatever we have
+    });
+    setTimeout(next, 8000); // stalled download — try the next candidate
+    p.src = candidates[i];
+  };
+  probe(0);
 
   if (reduced) {
     vids.forEach(v => { v.removeAttribute('autoplay'); v.pause(); v.currentTime = 1.2; });
