@@ -576,12 +576,10 @@
   const rig = document.querySelector('.rig');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Safari gets HEVC+alpha; everything else gets VP9+alpha WebM.
-  // On any decode/network error, each video swaps to the other file once;
-  // if the base layer exhausts both, fall back to the static skull image.
-  const ua = navigator.userAgent;
-  const isSafari = /safari/i.test(ua) && !/chrome|chromium|crios|edg|android/i.test(ua);
-  const order = isSafari ? ['head-hevc.mp4', 'head.webm'] : ['head.webm', 'head-hevc.mp4'];
+  // HEVC+alpha first (plays with transparency in Safari and Chrome on Mac);
+  // browsers without HEVC error out and swap to the VP9+alpha WebM.
+  // If the base layer exhausts both, fall back to the static skull image.
+  const order = ['head-hevc.mp4', 'head.webm'];
 
   const fallbackToImage = () => {
     if (rig.dataset.static) return;
