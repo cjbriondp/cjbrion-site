@@ -86,7 +86,7 @@
     transform-style: preserve-3d;
     animation: sway 18s ease-in-out infinite alternate;
   }
-  .rig video {
+  .rig video, .rig img {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -473,18 +473,9 @@
 <div class="stage" aria-hidden="true">
   <div class="bob">
     <div class="rig">
-      <video class="sk-gray" muted autoplay loop playsinline preload="auto">
-        <source src="head-hevc.mp4" type='video/mp4; codecs="hvc1"'>
-        <source src="head.webm" type='video/webm; codecs="vp9"'>
-      </video>
-      <video class="sk-color" muted autoplay loop playsinline preload="auto">
-        <source src="head-hevc.mp4" type='video/mp4; codecs="hvc1"'>
-        <source src="head.webm" type='video/webm; codecs="vp9"'>
-      </video>
-      <video class="sk-slices" muted autoplay loop playsinline preload="auto">
-        <source src="head-hevc.mp4" type='video/mp4; codecs="hvc1"'>
-        <source src="head.webm" type='video/webm; codecs="vp9"'>
-      </video>
+      <video class="sk-gray" muted autoplay loop playsinline preload="auto"></video>
+      <video class="sk-color" muted autoplay loop playsinline preload="auto"></video>
+      <video class="sk-slices" muted autoplay loop playsinline preload="auto"></video>
     </div>
   </div>
 </div>
@@ -522,7 +513,7 @@
     <div class="services">
       <span>BRAND FILMS</span><span>PRODUCT LAUNCH</span><span>EVENT COVERAGE</span><span>POST &amp; COLOR</span>
     </div>
-    <a class="cta" href="mailto:contact@cjbrion.com">START A PROJECT</a>
+    <a class="cta" href="mailto:Travis@arcacerebrum.com">START A PROJECT</a>
   </div>
 
   <div class="scrollcue">CLIENTS ▾</div>
@@ -552,7 +543,44 @@
 <script>
 (() => {
   const vids = Array.from(document.querySelectorAll('.rig video'));
+  const rig = document.querySelector('.rig');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Safari gets HEVC+alpha; everything else gets VP9+alpha WebM.
+  // On any decode/network error, each video swaps to the other file once;
+  // if the base layer exhausts both, fall back to the static skull image.
+  const ua = navigator.userAgent;
+  const isSafari = /safari/i.test(ua) && !/chrome|chromium|crios|edg|android/i.test(ua);
+  const order = isSafari ? ['head-hevc.mp4', 'head.webm'] : ['head.webm', 'head-hevc.mp4'];
+
+  const fallbackToImage = () => {
+    if (rig.dataset.static) return;
+    rig.dataset.static = '1';
+    rig.innerHTML =
+      '<img class="sk-gray" src="skull.png" alt="">' +
+      '<img class="sk-color" src="skull.png" alt="">' +
+      '<img class="sk-slices" src="skull.png" alt="">';
+  };
+
+  vids.forEach(v => {
+    let i = 0;
+    v.addEventListener('error', () => {
+      i += 1;
+      if (i < order.length) {
+        v.src = order[i];
+        if (!reduced) v.play().catch(() => {});
+      } else if (v === vids[0]) {
+        fallbackToImage();
+      }
+    });
+    v.src = order[0];
+  });
+
+  // Safety net: if nothing has decoded after 12s and the base video is dead, go static.
+  setTimeout(() => {
+    if (vids[0].isConnected && vids[0].readyState < 2 && vids[0].networkState === 3) fallbackToImage();
+  }, 12000);
+
   if (reduced) {
     vids.forEach(v => { v.removeAttribute('autoplay'); v.pause(); v.currentTime = 1.2; });
     return;
@@ -560,6 +588,7 @@
   const base = vids[0];
   // keep the glitch layers locked to the base rotation
   setInterval(() => {
+    if (rig.dataset.static) return;
     vids.slice(1).forEach(v => {
       if (Math.abs(v.currentTime - base.currentTime) > 0.08) v.currentTime = base.currentTime;
     });
