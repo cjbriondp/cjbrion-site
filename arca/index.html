@@ -358,21 +358,6 @@
     outline: none;
   }
 
-  .scrollcue {
-    align-self: center;
-    margin-bottom: 3vh;
-    font-family: "Michroma", sans-serif;
-    font-size: 8px;
-    letter-spacing: 0.4em;
-    text-indent: 0.4em;
-    color: var(--paper-dim);
-    animation: cue 2.6s ease-in-out infinite;
-  }
-  @keyframes cue {
-    0%, 100% { transform: translateY(0); opacity: 0.55; }
-    50% { transform: translateY(6px); opacity: 1; }
-  }
-
   /* ============ CLIENT WALL ============ */
   .clients {
     position: relative;
@@ -460,7 +445,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .bob, .rig, .sk-gray, .sk-color, .sk-slices,
-    .crt-band, .crt-flicker, .frag, .scrollcue,
+    .crt-band, .crt-flicker, .frag,
     h1::before, h1::after { animation: none !important; }
     .sk-color { opacity: 0.5; }
   }
@@ -515,7 +500,6 @@
     <a class="cta" href="mailto:Travis@arcacerebrum.com">START A PROJECT</a>
   </div>
 
-  <div class="scrollcue">CLIENTS ▾</div>
 </div>
 
 <section class="clients">
