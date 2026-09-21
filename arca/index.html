@@ -438,7 +438,6 @@
   .lm-anaplan   { font-weight: 400; font-size: 20px; text-transform: capitalize; letter-spacing: 0.04em; }
   .lm-servicetitan { font-weight: 600; font-size: 17px; }
   .lm-netflix   { font-family: "Michroma", sans-serif; font-size: 18px; letter-spacing: 0.12em; transform: scaleY(1.35); }
-  .lm-robotheart { font-family: "Michroma", sans-serif; font-size: 13px; letter-spacing: 0.22em; display: flex; align-items: center; gap: 9px; }
   .lm-newrelic  { font-weight: 300; font-size: 20px; letter-spacing: 0.02em; }
   .lm-newrelic b { font-weight: 600; }
 
@@ -533,7 +532,38 @@
     <div class="client"><span class="lm lm-anaplan">Anaplan</span></div>
     <div class="client"><span class="lm lm-servicetitan">ServiceTitan</span></div>
     <div class="client"><span class="lm lm-netflix">NETFLIX</span></div>
-    <div class="client"><span class="lm lm-robotheart"><svg width="15" height="14" viewBox="0 0 16 15"><path d="M8 15 1.3 8A4.4 4.4 0 0 1 8 2.4 4.4 4.4 0 0 1 14.7 8Z"/></svg>ROBOT&nbsp;HEART</span></div>
+    <div class="client" title="Robot Heart">
+      <svg width="54" height="49" viewBox="0 0 100 90" aria-label="Robot Heart">
+        <mask id="rh-mask">
+          <rect width="100" height="90" fill="#000"/>
+          <!-- antenna -->
+          <circle cx="50" cy="6" r="4.5" fill="#fff"/>
+          <rect x="48.4" y="7" width="3.2" height="6" fill="#fff"/>
+          <!-- head + ears -->
+          <rect x="28" y="12" width="44" height="26" rx="5" fill="#fff"/>
+          <rect x="18" y="18" width="6" height="14" rx="3" fill="#fff"/>
+          <rect x="76" y="18" width="6" height="14" rx="3" fill="#fff"/>
+          <!-- bolt, eye, mouth cutouts -->
+          <polygon points="43,15 35,27 39,27 36,35 45,23 41,23" fill="#000"/>
+          <rect x="57" y="17.5" width="7.5" height="7.5" fill="#000"/>
+          <rect x="41" y="30" width="17" height="3.2" rx="1.6" fill="#000"/>
+          <!-- body + arms -->
+          <rect x="26" y="42" width="48" height="38" rx="6" fill="#fff"/>
+          <rect x="12" y="48" width="8" height="25" rx="4" fill="#fff"/>
+          <rect x="80" y="48" width="8" height="25" rx="4" fill="#fff"/>
+          <!-- dot heart cutout -->
+          <g fill="#000">
+            <circle cx="40" cy="49" r="2.1"/><circle cx="45" cy="49" r="2.1"/><circle cx="55" cy="49" r="2.1"/><circle cx="60" cy="49" r="2.1"/>
+            <circle cx="35" cy="54" r="2.1"/><circle cx="40" cy="54" r="2.1"/><circle cx="45" cy="54" r="2.1"/><circle cx="50" cy="54" r="2.1"/><circle cx="55" cy="54" r="2.1"/><circle cx="60" cy="54" r="2.1"/><circle cx="65" cy="54" r="2.1"/>
+            <circle cx="35" cy="59" r="2.1"/><circle cx="40" cy="59" r="2.1"/><circle cx="45" cy="59" r="2.1"/><circle cx="50" cy="59" r="2.1"/><circle cx="55" cy="59" r="2.1"/><circle cx="60" cy="59" r="2.1"/><circle cx="65" cy="59" r="2.1"/>
+            <circle cx="40" cy="64" r="2.1"/><circle cx="45" cy="64" r="2.1"/><circle cx="50" cy="64" r="2.1"/><circle cx="55" cy="64" r="2.1"/><circle cx="60" cy="64" r="2.1"/>
+            <circle cx="45" cy="69" r="2.1"/><circle cx="50" cy="69" r="2.1"/><circle cx="55" cy="69" r="2.1"/>
+            <circle cx="50" cy="74" r="2.1"/>
+          </g>
+        </mask>
+        <rect width="100" height="90" fill="currentColor" mask="url(#rh-mask)"/>
+      </svg>
+    </div>
     <div class="client"><span class="lm lm-newrelic"><b>new</b>relic</span></div>
   </div>
 </section>
