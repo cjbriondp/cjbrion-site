@@ -1,132 +1,122 @@
 <!doctype html>
-<html lang="en" data-motion="paused" data-paused="true">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#000000">
-  <meta name="description" content="Arca Cerebrum — commercial video production, brand films, product launches, event coverage and specialty production.">
+  <meta name="theme-color" content="#f1efea">
+  <meta name="description" content="Arca Cerebrum — commercial video production. Brand films, product launches, event coverage, and specialty production.">
   <title>Arca Cerebrum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Chakra+Petch:wght@300;400;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
-  <script src="background.js" defer></script>
+  <script src="site.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="room" aria-hidden="true"></div>
-<div class="floor" aria-hidden="true"></div>
-<div class="haze" aria-hidden="true"></div>
-<div class="head-glow" aria-hidden="true"></div>
-<div class="stage" aria-hidden="true">
-  <div class="bob">
-    <div class="rig">
-      <img class="head-poster" src="assets/head-poster.jpg" width="960" height="960" alt="" fetchpriority="high">
-      <video class="head-video" data-src="assets/head-turntable-runway-neck-v2.mp4" muted loop playsinline preload="none" disablepictureinpicture tabindex="-1"></video>
-      <div class="head-scanlines"></div>
-    </div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <svg width="30" height="29" viewBox="0 0 220 210" fill="currentColor" aria-hidden="true">
+        <path d="M126 62 108 66 102 76 88 78 82 90 64 96 56 120 56 182 122 182 122 160 134 152 150 140 142 130 152 122 143 114 157 106 143 82Z"/>
+        <polygon points="64,34 76,32 58,8"/>
+        <polygon points="76,32 88,34 94,10"/>
+        <polygon points="42,44 64,34 88,34 98,42 66,48"/>
+        <polygon points="88,34 98,42 108,28"/>
+        <polygon points="104,52 116,46 112,60"/>
+        <polygon points="124,34 134,30 130,42"/>
+      </svg>
+      <span class="brand-name">ARCA <span>CEREBRUM</span></span>
+    </a>
+    <a class="nav-link" href="contact.html">CONTACT</a>
   </div>
-</div>
-<!-- drifting debris fragments -->
-<div class="frag" style="left:16%; top:24%; --d:22s; --dx:34px; --dy:-40px; --rot:60deg;" aria-hidden="true">
-  <svg width="14" height="14" viewBox="0 0 14 14"><polygon points="0,14 7,0 14,14" fill="#d8302f" opacity="0.55"/></svg>
-</div>
-<div class="frag" style="left:78%; top:30%; --d:26s; --dx:-40px; --dy:30px; --rot:-50deg;" aria-hidden="true">
-  <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="0,0 10,3 3,10" fill="#c9bfa8" opacity="0.4"/></svg>
-</div>
-<div class="frag" style="left:70%; top:68%; --d:19s; --dx:26px; --dy:-34px; --rot:80deg;" aria-hidden="true">
-  <svg width="12" height="12" viewBox="0 0 12 12"><polygon points="0,12 12,12 6,0" fill="#8e8b84" opacity="0.45"/></svg>
-</div>
-<div class="frag" style="left:24%; top:66%; --d:24s; --dx:-30px; --dy:-24px; --rot:-70deg;" aria-hidden="true">
-  <svg width="9" height="9" viewBox="0 0 9 9"><polygon points="0,0 9,0 4,9" fill="#d8302f" opacity="0.4"/></svg>
-</div>
-<div class="frag" style="left:60%; top:14%; --d:28s; --dx:20px; --dy:36px; --rot:45deg;" aria-hidden="true">
-  <svg width="8" height="8" viewBox="0 0 8 8"><rect width="8" height="8" fill="#c9bfa8" opacity="0.35"/></svg>
-</div>
-<div class="frag" style="left:36%; top:12%; --d:21s; --dx:-22px; --dy:26px; --rot:-90deg;" aria-hidden="true">
-  <svg width="7" height="7" viewBox="0 0 7 7"><polygon points="0,7 7,7 7,0" fill="#d8302f" opacity="0.35"/></svg>
-</div>
+</header>
 
 <main id="main">
-<div class="content">
-  <header>
-    <div class="wordmark">ARCA <b>CEREBRUM</b></div>
-    <div class="tagline">CREATIVITY EX MACHINA</div>
-  </header>
+  <section class="hero wrap">
+    <svg class="hero-mark" viewBox="0 0 220 210" fill="currentColor" aria-hidden="true">
+      <path d="M126 62 108 66 102 76 88 78 82 90 64 96 56 120 56 182 122 182 122 160 134 152 150 140 142 130 152 122 143 114 157 106 143 82Z"/>
+      <g class="bird">
+        <polygon points="64,34 76,32 58,8"/>
+        <polygon points="76,32 88,34 94,10"/>
+        <polygon points="42,44 64,34 88,34 98,42 66,48"/>
+        <polygon points="88,34 98,42 108,28"/>
+      </g>
+      <g class="folds">
+        <polygon points="104,52 116,46 112,60"/>
+        <polygon points="124,34 134,30 130,42"/>
+      </g>
+    </svg>
 
-  <div class="hero">
     <p class="eyebrow">COMMERCIAL VIDEO PRODUCTION</p>
-    <h1 data-text="ARCA CEREBRUM">ARCA CEREBRUM</h1>
+    <h1>ARCA CEREBRUM</h1>
+
     <p class="lede">Concept through execution. We build films for brands that need the work to be remembered — launch spots, brand anthems, and event stories captured with intent.</p>
+    <p class="lede">We keep crews small and senior. The people who plan your shoot are the ones holding the cameras, so decisions happen on set, not in email threads.</p>
+
     <div class="services">
       <span>BRAND FILMS</span><span>PRODUCT LAUNCH</span><span>EVENT COVERAGE</span><span>SPECIALTY PRODUCTION</span>
     </div>
-    <a class="cta" href="mailto:Travis@arcacerebrum.com">START A PROJECT</a>
-  </div>
 
-</div>
+    <a class="cta" href="contact.html">START A PROJECT</a>
+  </section>
 
-<section class="clients" aria-labelledby="clients-title">
-  <div class="clients-head"><h2 id="clients-title">TRUSTED BY</h2></div>
-  <div class="logo-grid">
-    <div class="client" title="Apple">
-      <svg width="26" height="32" viewBox="0 0 26 32" aria-label="Apple">
-        <path d="M18.4 8.6c-1.5 0-3.4 1.05-4.5 1.05-1.15 0-2.85-1-4.6-1C6 8.65 2.2 11.5 2.2 17.2c0 3.55 1.35 7.3 3.05 9.7 1.45 2.05 2.7 3.7 4.5 3.7 1.8 0 2.6-1.2 4.8-1.2 2.25 0 2.75 1.15 4.75 1.15 2 0 3.3-1.8 4.55-3.6 1.4-2.05 2-4.05 2.05-4.15-.1-.05-3.95-1.6-3.95-6 0-3.8 3.05-5.5 3.2-5.6-1.75-2.6-4.45-2.6-4.75-2.6zM17.2 5.8c1-1.2 1.7-2.85 1.5-4.55-1.45.05-3.25.95-4.3 2.2-.95 1.1-1.8 2.8-1.55 4.45 1.65.15 3.3-.85 4.35-2.1z"/>
-      </svg>
+  <section class="clients wrap" aria-labelledby="clients-title">
+    <div class="clients-head"><h2 id="clients-title">TRUSTED BY</h2></div>
+    <div class="logo-grid">
+      <div class="client" title="Apple">
+        <svg width="24" height="30" viewBox="0 0 26 32" aria-label="Apple">
+          <path d="M18.4 8.6c-1.5 0-3.4 1.05-4.5 1.05-1.15 0-2.85-1-4.6-1C6 8.65 2.2 11.5 2.2 17.2c0 3.55 1.35 7.3 3.05 9.7 1.45 2.05 2.7 3.7 4.5 3.7 1.8 0 2.6-1.2 4.8-1.2 2.25 0 2.75 1.15 4.75 1.15 2 0 3.3-1.8 4.55-3.6 1.4-2.05 2-4.05 2.05-4.15-.1-.05-3.95-1.6-3.95-6 0-3.8 3.05-5.5 3.2-5.6-1.75-2.6-4.45-2.6-4.75-2.6zM17.2 5.8c1-1.2 1.7-2.85 1.5-4.55-1.45.05-3.25.95-4.3 2.2-.95 1.1-1.8 2.8-1.55 4.45 1.65.15 3.3-.85 4.35-2.1z"/>
+        </svg>
+      </div>
+      <div class="client"><span class="lm lm-oracle">ORACLE</span></div>
+      <div class="client"><span class="lm lm-tanium">TANIUM</span></div>
+      <div class="client"><span class="lm lm-twilio">twilio</span></div>
+      <div class="client"><span class="lm lm-anaplan">Anaplan</span></div>
+      <div class="client"><span class="lm lm-servicetitan">ServiceTitan</span></div>
+      <div class="client"><span class="lm lm-netflix">NETFLIX</span></div>
+      <div class="client" title="Robot Heart">
+        <svg width="50" height="45" viewBox="0 0 100 90" aria-label="Robot Heart">
+          <mask id="rh-mask">
+            <rect width="100" height="90" fill="#000"/>
+            <circle cx="50" cy="6" r="4.5" fill="#fff"/>
+            <rect x="48.4" y="7" width="3.2" height="6" fill="#fff"/>
+            <rect x="28" y="12" width="44" height="26" rx="5" fill="#fff"/>
+            <rect x="18" y="18" width="6" height="14" rx="3" fill="#fff"/>
+            <rect x="76" y="18" width="6" height="14" rx="3" fill="#fff"/>
+            <polygon points="43,15 35,27 39,27 36,35 45,23 41,23" fill="#000"/>
+            <rect x="57" y="17.5" width="7.5" height="7.5" fill="#000"/>
+            <rect x="41" y="30" width="17" height="3.2" rx="1.6" fill="#000"/>
+            <rect x="26" y="42" width="48" height="38" rx="6" fill="#fff"/>
+            <rect x="12" y="48" width="8" height="25" rx="4" fill="#fff"/>
+            <rect x="80" y="48" width="8" height="25" rx="4" fill="#fff"/>
+            <g fill="#000">
+              <circle cx="40" cy="49" r="2.1"/><circle cx="45" cy="49" r="2.1"/><circle cx="55" cy="49" r="2.1"/><circle cx="60" cy="49" r="2.1"/>
+              <circle cx="35" cy="54" r="2.1"/><circle cx="40" cy="54" r="2.1"/><circle cx="45" cy="54" r="2.1"/><circle cx="50" cy="54" r="2.1"/><circle cx="55" cy="54" r="2.1"/><circle cx="60" cy="54" r="2.1"/><circle cx="65" cy="54" r="2.1"/>
+              <circle cx="35" cy="59" r="2.1"/><circle cx="40" cy="59" r="2.1"/><circle cx="45" cy="59" r="2.1"/><circle cx="50" cy="59" r="2.1"/><circle cx="55" cy="59" r="2.1"/><circle cx="60" cy="59" r="2.1"/><circle cx="65" cy="59" r="2.1"/>
+              <circle cx="40" cy="64" r="2.1"/><circle cx="45" cy="64" r="2.1"/><circle cx="50" cy="64" r="2.1"/><circle cx="55" cy="64" r="2.1"/><circle cx="60" cy="64" r="2.1"/>
+              <circle cx="45" cy="69" r="2.1"/><circle cx="50" cy="69" r="2.1"/><circle cx="55" cy="69" r="2.1"/>
+              <circle cx="50" cy="74" r="2.1"/>
+            </g>
+          </mask>
+          <rect width="100" height="90" fill="currentColor" mask="url(#rh-mask)"/>
+        </svg>
+        <span class="lm lm-robotheart">ROBOT&nbsp;HEART</span>
+      </div>
+      <div class="client"><span class="lm lm-newrelic"><b>new</b>relic</span></div>
+      <div class="client"><span class="lm lm-cloudflare">CLOUDFLARE</span></div>
+      <div class="client"><span class="lm lm-summit">SUMMIT</span></div>
+      <div class="client"><span class="lm lm-thegrove">THE&nbsp;GROVE</span></div>
     </div>
-    <div class="client"><span class="lm lm-oracle">ORACLE</span></div>
-    <div class="client"><span class="lm lm-tanium">TANIUM</span></div>
-    <div class="client"><span class="lm lm-twilio">twilio</span></div>
-    <div class="client"><span class="lm lm-anaplan">Anaplan</span></div>
-    <div class="client"><span class="lm lm-servicetitan">ServiceTitan</span></div>
-    <div class="client"><span class="lm lm-netflix">NETFLIX</span></div>
-    <div class="client" title="Robot Heart">
-      <svg width="54" height="49" viewBox="0 0 100 90" aria-label="Robot Heart">
-        <mask id="rh-mask">
-          <rect width="100" height="90" fill="#000"/>
-          <!-- antenna -->
-          <circle cx="50" cy="6" r="4.5" fill="#fff"/>
-          <rect x="48.4" y="7" width="3.2" height="6" fill="#fff"/>
-          <!-- head + ears -->
-          <rect x="28" y="12" width="44" height="26" rx="5" fill="#fff"/>
-          <rect x="18" y="18" width="6" height="14" rx="3" fill="#fff"/>
-          <rect x="76" y="18" width="6" height="14" rx="3" fill="#fff"/>
-          <!-- bolt, eye, mouth cutouts -->
-          <polygon points="43,15 35,27 39,27 36,35 45,23 41,23" fill="#000"/>
-          <rect x="57" y="17.5" width="7.5" height="7.5" fill="#000"/>
-          <rect x="41" y="30" width="17" height="3.2" rx="1.6" fill="#000"/>
-          <!-- body + arms -->
-          <rect x="26" y="42" width="48" height="38" rx="6" fill="#fff"/>
-          <rect x="12" y="48" width="8" height="25" rx="4" fill="#fff"/>
-          <rect x="80" y="48" width="8" height="25" rx="4" fill="#fff"/>
-          <!-- dot heart cutout -->
-          <g fill="#000">
-            <circle cx="40" cy="49" r="2.1"/><circle cx="45" cy="49" r="2.1"/><circle cx="55" cy="49" r="2.1"/><circle cx="60" cy="49" r="2.1"/>
-            <circle cx="35" cy="54" r="2.1"/><circle cx="40" cy="54" r="2.1"/><circle cx="45" cy="54" r="2.1"/><circle cx="50" cy="54" r="2.1"/><circle cx="55" cy="54" r="2.1"/><circle cx="60" cy="54" r="2.1"/><circle cx="65" cy="54" r="2.1"/>
-            <circle cx="35" cy="59" r="2.1"/><circle cx="40" cy="59" r="2.1"/><circle cx="45" cy="59" r="2.1"/><circle cx="50" cy="59" r="2.1"/><circle cx="55" cy="59" r="2.1"/><circle cx="60" cy="59" r="2.1"/><circle cx="65" cy="59" r="2.1"/>
-            <circle cx="40" cy="64" r="2.1"/><circle cx="45" cy="64" r="2.1"/><circle cx="50" cy="64" r="2.1"/><circle cx="55" cy="64" r="2.1"/><circle cx="60" cy="64" r="2.1"/>
-            <circle cx="45" cy="69" r="2.1"/><circle cx="50" cy="69" r="2.1"/><circle cx="55" cy="69" r="2.1"/>
-            <circle cx="50" cy="74" r="2.1"/>
-          </g>
-        </mask>
-        <rect width="100" height="90" fill="currentColor" mask="url(#rh-mask)"/>
-      </svg>
-      <span class="lm lm-robotheart">ROBOT&nbsp;HEART</span>
-    </div>
-    <div class="client"><span class="lm lm-newrelic"><b>new</b>relic</span></div>
-    <div class="client"><span class="lm lm-cloudflare">CLOUDFLARE</span></div>
-    <div class="client"><span class="lm lm-summit">SUMMIT</span></div>
-    <div class="client"><span class="lm lm-thegrove">THE&nbsp;GROVE</span></div>
-  </div>
-</section>
-
+  </section>
 </main>
-<footer>ARCA CEREBRUM · CREATIVITY EX MACHINA</footer>
 
-
-<button class="motion-toggle" type="button" aria-label="Play background motion" hidden>
-  <span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Play motion</span>
-</button>
-<p class="sr-only" id="motion-status" role="status"></p>
+<footer>
+  <div class="wrap">
+    <span>ARCA CEREBRUM · CREATIVITY EX MACHINA</span>
+    <a href="mailto:Travis@arcacerebrum.com">TRAVIS@ARCACEREBRUM.COM</a>
+  </div>
+</footer>
 </body>
 </html>
