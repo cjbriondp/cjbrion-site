@@ -1,6 +1,25 @@
 (() => {
   'use strict';
 
+  // Ghosted spinning head: start it once the page is up, fade in on first frame.
+  const video = document.querySelector('.head-video');
+  const scene = document.querySelector('.scene');
+  if (video && scene) {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const sync = () => {
+      if (reduced.matches || document.hidden) {
+        video.pause();
+        return;
+      }
+      if (!video.getAttribute('src')) video.src = video.dataset.src;
+      video.play().catch(() => {});
+    };
+    video.addEventListener('playing', () => scene.classList.add('video-ready'));
+    document.addEventListener('visibilitychange', sync);
+    reduced.addEventListener('change', sync);
+    sync();
+  }
+
   // Shuffle the Trusted By wall so every visit shows a random order.
   const grid = document.querySelector('.logo-grid');
   if (grid) {
