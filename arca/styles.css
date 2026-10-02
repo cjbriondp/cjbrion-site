@@ -198,6 +198,7 @@ body {
     margin-top: 18px;
   }
   .svc-live br { display: none; }
+  .svc-live span { margin: 0 0.3em; }
   .scene-cta { display: none; }
 }
 
